@@ -23,7 +23,6 @@ func _physics_process(delta):
 		if collision:
 			if collision.get_collider().get_class() == "AnimatableBody3D":
 				velocity += collision.get_collider().velocity
-				print("YO")
 		velocity.y = JUMP_VELOCITY
 		
 		
