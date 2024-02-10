@@ -57,4 +57,19 @@ shape = SubResource("BoxShape3D_howin")
 [node name="MeshInstance3D" parent="Moving Platform2" index="1"]
 mesh = SubResource("BoxMesh_qu3e0")
 
+[node name="Moving Platform3" parent="." instance=ExtResource("3_n8b2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, -4, 0)
+period = 4
+initialPosition = Vector3(-6.5, -4, 0)
+finalPosition = Vector3(-6.5, 4, 0)
+
+[node name="CollisionShape3D" parent="Moving Platform3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.92184, 0, 0, 0)
+shape = SubResource("BoxShape3D_howin")
+
+[node name="MeshInstance3D" parent="Moving Platform3" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.922, 0, 0, 0)
+mesh = SubResource("BoxMesh_qu3e0")
+
 [editable path="Moving Platform2"]
+[editable path="Moving Platform3"]

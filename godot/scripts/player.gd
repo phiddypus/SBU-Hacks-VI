@@ -7,20 +7,19 @@ const JUMP_VELOCITY = 4.5
 const MOUSE_SENS = 0.003
 
 var can_dash = true
-var base_velocity = Vector3.ZERO
 var dashing = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func get_ground_velocity ():
+"""func get_ground_velocity ():
 	for i in range(get_slide_collision_count()):
 		var coll = get_slide_collision(i)
 		if coll.get_angle() == get_floor_angle():
 			var collColl = coll.get_collider()
 			if "velocity" in collColl:
 				return collColl.velocity
-	return Vector3.ZERO
+	return Vector3.ZERO"""
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -45,7 +44,6 @@ func _physics_process(delta):
 	velocity.z = velXZ.z
 
 	if on_floor:
-		base_velocity = get_ground_velocity()
 		if Input.is_action_just_pressed("game_jump"):
 			velocity.y = JUMP_VELOCITY
 	else:
@@ -63,6 +61,9 @@ func _physics_process(delta):
 		velocity = DASH_SPEED*velocity.normalized()
 		dashing=false
 	
+	
+	# Cap velocity
+	velocity.y = clamp(velocity.y,-20,20)
 	move_and_slide()
 
 func _input(event):

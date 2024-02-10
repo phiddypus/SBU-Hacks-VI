@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpjr2nc3r4ifl"]
+[gd_scene load_steps=7 format=3 uid="uid://csch4ksfkdy6s"]
 
 [ext_resource type="PackedScene" uid="uid://dlun07cx67ccr" path="res://scenes/player.tscn" id="1_gt4xh"]
 [ext_resource type="PackedScene" uid="uid://bvip7vcq1rgl0" path="res://scenes/moving_platform.tscn" id="2_214qh"]
 [ext_resource type="Script" path="res://scripts/moving_platform.gd" id="2_cpqhh"]
-[ext_resource type="PackedScene" uid="uid://qh0vkpy2c73g" path="res://scenes/jump_pad.tscn" id="5_4m1pi"]
+[ext_resource type="PackedScene" path="res://scenes/jump_pad.tscn" id="5_4m1pi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlbv1"]
 size = Vector3(15, 0.5, 15)
