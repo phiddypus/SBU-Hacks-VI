@@ -13,6 +13,8 @@ size = Vector3(1, 0.5, 1)
 [node name="world" type="Node3D"]
 
 [node name="StaticBody3D" parent="." instance=ExtResource("1_m8i3x")]
+collision_layer = 2
+collision_mask = 0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.890086, 0.455793, 0, -0.455793, 0.890086, 0, 4.13944, 3.75863)
