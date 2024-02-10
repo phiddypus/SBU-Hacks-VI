@@ -17,7 +17,16 @@ func _physics_process(delta):
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		
+		# If Jumping on Moving Platform
+		var collision = move_and_collide(Vector3(0,-1,0)*delta)
+		if collision:
+			if collision.get_collider().get_class() == "AnimatableBody3D":
+				velocity += collision.get_collider().velocity
+				print("YO")
 		velocity.y = JUMP_VELOCITY
+		
+		
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("game_left", "game_right", "game_front", "game_back")
@@ -28,8 +37,9 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
 	move_and_slide()
+		
 
 func _input(event):
 	if event is InputEventMouseMotion:
