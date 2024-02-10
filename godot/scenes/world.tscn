@@ -37,7 +37,7 @@ mesh = SubResource("BoxMesh_w0rl2")
 transform = Transform3D(1, 0, 0, 0, 0.890086, 0.455793, 0, -0.455793, 0.890086, 0, 4.13944, 3.75863)
 
 [node name="Player" parent="." instance=ExtResource("2_bx8pb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80596, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20394, 0)
 
 [node name="Jump Pad" parent="." instance=ExtResource("3_2fjsn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -5.36763)
