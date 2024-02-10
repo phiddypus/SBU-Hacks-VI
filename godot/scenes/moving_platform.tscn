@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_c3ph5"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qmxhm"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_rhes0"]
 size = Vector3(5, 0.5, 5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_qx8a3"]
+[sub_resource type="BoxMesh" id="BoxMesh_ovd43"]
 size = Vector3(5, 0.5, 5)
 
 [node name="Moving Platform" type="AnimatableBody3D"]
 script = ExtResource("1_c3ph5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_qmxhm")
+shape = SubResource("BoxShape3D_rhes0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999341, 0, 0, 0, 0.999341, 0, 0, 0, 0.999341, 0, 0, 0)
-mesh = SubResource("BoxMesh_qx8a3")
+mesh = SubResource("BoxMesh_ovd43")
