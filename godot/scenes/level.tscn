@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtqq2x8nujj4"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_j5tnk"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w7fsr"]
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_op4ry"]
+height = 1.0
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_j5tnk")
+
+[node name="End" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="End"]
+shape = SubResource("CylinderShape3D_w7fsr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="End"]
+mesh = SubResource("CylinderMesh_op4ry")

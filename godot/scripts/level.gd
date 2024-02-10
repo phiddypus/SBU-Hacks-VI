@@ -1,12 +1,16 @@
-extends StaticBody3D
+extends Node3D
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@export var startPos = Vector3.ZERO
+@export var endPos = Vector3.ZERO
+
+var started = false
+var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	endPos = $End.position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if started:
+		time += delta
