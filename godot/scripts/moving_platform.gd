@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends AnimatableBody3D
 
 # Called when the node enters the scene tree for the first time.
 @export var period = 5
