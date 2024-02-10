@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgpdkyf3max8v"]
+[gd_scene load_steps=7 format=3 uid="uid://bgpdkyf3max8v"]
 
 [ext_resource type="PackedScene" uid="uid://h0xdvrrfp3by" path="res://scenes/platform.tscn" id="1_m8i3x"]
 [ext_resource type="PackedScene" uid="uid://dlun07cx67ccr" path="res://scenes/player.tscn" id="2_bx8pb"]
+[ext_resource type="PackedScene" uid="uid://qh0vkpy2c73g" path="res://scenes/jump_pad.tscn" id="3_2fjsn"]
 [ext_resource type="PackedScene" uid="uid://bvip7vcq1rgl0" path="res://scenes/moving_platform.tscn" id="3_n8b2x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_howin"]
@@ -21,6 +22,9 @@ transform = Transform3D(1, 0, 0, 0, 0.890086, 0.455793, 0, -0.455793, 0.890086, 
 
 [node name="Player" parent="." instance=ExtResource("2_bx8pb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80596, 0)
+
+[node name="Jump Pad" parent="." instance=ExtResource("3_2fjsn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -5.36763)
 
 [node name="Moving Platform" parent="." instance=ExtResource("3_n8b2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0948, 0, 0)
