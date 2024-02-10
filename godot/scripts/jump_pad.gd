@@ -15,3 +15,4 @@ func _process(delta):
 func _on_body_entered(body):
 	if body is CharacterBody3D:
 		body.velocity.y = jump_pad_strength
+		body.can_dash=true

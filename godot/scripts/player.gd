@@ -5,10 +5,9 @@ const DASH_SPEED = WALK_SPEED ** 2
 const WALK_DAMP = 0.25
 const JUMP_VELOCITY = 4.5
 const MOUSE_SENS = 0.003
-const DASH_COOLDOWN = 1.5
 
+var can_dash = true
 var base_velocity = Vector3.ZERO
-var dash_timer = 0
 var dashing = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -38,7 +37,8 @@ func _physics_process(delta):
 		target_velocity = move
 	if not on_floor:
 		target_velocity = (target_velocity + velXZ).limit_length(max(velXZ.length(), WALK_SPEED))
-		#print(target_velocity)
+	else:
+		can_dash=true
 
 	velXZ = velXZ.lerp(target_velocity, WALK_DAMP)
 	velocity.x = velXZ.x
@@ -52,18 +52,15 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 	
 	# Dash
-	if dash_timer <= DASH_COOLDOWN:
-		dash_timer += delta
-		
 	if dashing:
 		var camera = $Camera3D
 		#var camera_dir = $Camera3D.basis.z
 		var dir = Basis(Vector3(1,0,0),camera.rotation.x*2)*Basis(Vector3(0,1,0), camera.rotation.y*2)*Vector3(0,0,1)
 		#print(camera.basis.z.y)
-		velocity.x = -dir.x * DASH_SPEED
-		velocity.y = -camera.basis.z.y * DASH_SPEED
-		velocity.z = -dir.z * DASH_SPEED
-		dash_timer=0
+		velocity.x = -dir.x 
+		velocity.y = -camera.basis.z.y 
+		velocity.z = -dir.z 
+		velocity = DASH_SPEED*velocity.normalized()
 		dashing=false
 	
 	move_and_slide()
@@ -77,7 +74,8 @@ func _input(event):
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 		
 	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_SHIFT and dash_timer>DASH_COOLDOWN:
+		if event.pressed and event.keycode == KEY_SHIFT and can_dash:
+			can_dash=false
 			dashing=true
 			
 

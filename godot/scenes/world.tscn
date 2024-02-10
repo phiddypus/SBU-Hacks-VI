@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://baoy87b10m0si" path="res://textures/woodtext.png" id="1_5sgq1"]
 [ext_resource type="PackedScene" uid="uid://dlun07cx67ccr" path="res://scenes/player.tscn" id="2_bx8pb"]
-[ext_resource type="PackedScene" uid="uid://qh0vkpy2c73g" path="res://scenes/jump_pad.tscn" id="3_2fjsn"]
+[ext_resource type="PackedScene" path="res://scenes/jump_pad.tscn" id="3_2fjsn"]
 [ext_resource type="PackedScene" uid="uid://bvip7vcq1rgl0" path="res://scenes/moving_platform.tscn" id="3_n8b2x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vv6oa"]
