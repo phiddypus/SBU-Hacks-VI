@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://qh0vkpy2c73g"]
+
+[ext_resource type="Script" path="res://scripts/jump_pad.gd" id="1_usgn6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1b2yk"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4rae3"]
+size = Vector3(1, 0.2, 1)
+
+[node name="Jump Pad" type="Area3D"]
+collision_layer = 4
+script = ExtResource("1_usgn6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_1b2yk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_4rae3")
