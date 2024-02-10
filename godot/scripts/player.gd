@@ -20,7 +20,6 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("game_left", "game_right", "game_front", "game_back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized().rotated(Vector3.UP, rotation.y)
 	if direction:
@@ -38,6 +37,7 @@ func _input(event):
 		rotation.y -= y_rotation
 		$Camera3D.rotation.y -= y_rotation
 		$Camera3D.rotation.x -= event.relative.y * MOUSE_SENS
+		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 
 func _process(delta):
 	pass

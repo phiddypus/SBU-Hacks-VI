@@ -7,7 +7,6 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_afmb7"]
 
 [node name="Player" type="CharacterBody3D"]
-transform = Transform3D(0.998868, 0, 0.0475597, 0, 1, 0, -0.0475597, 0, 0.998868, 0, 0, 0)
 script = ExtResource("1_vylms")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
