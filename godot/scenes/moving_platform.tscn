@@ -3,10 +3,12 @@
 [ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_c3ph5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qmxhm"]
+size = Vector3(5, 0.5, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qx8a3"]
+size = Vector3(5, 0.5, 5)
 
-[node name="Moving Platform" type="StaticBody3D"]
+[node name="Moving Platform" type="RigidBody3D"]
 script = ExtResource("1_c3ph5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
