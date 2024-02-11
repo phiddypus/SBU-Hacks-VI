@@ -2,24 +2,17 @@ extends CharacterBody3D
 
 const WALK_SPEED = 5.0
 const DASH_SPEED = WALK_SPEED ** 2
-const WALK_DAMP = 0.25
+const SLIDE_SPEED = 4.0
+const SLIDE_VERT_DIFF = 0.1
+const MOVE_DAMP = 0.25
 const JUMP_VELOCITY = 4.5
-const WALLRUN_EFFC = 0.2 # how slow you fall when on a wall
+const WALLFALL_SPEED = 0.2 # how slow you fall when on a wall
 const MOUSE_SENS = 0.003
 
 var can_dash = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-#func get_ground_velocity ():
-	#for i in range(get_slide_collision_count()):
-		#var coll = get_slide_collision(i)
-		#if coll.get_angle() == get_floor_angle():
-			#var collColl = coll.get_collider()
-			#if "velocity" in collColl:
-				#return collColl.velocity
-	#return Vector3.ZERO
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -28,26 +21,46 @@ func _physics_process(delta):
 	# Get the input direction
 	var input_dir = Input.get_vector("game_left", "game_right", "game_front", "game_back")
 	var on_floor = is_on_floor()
-	var velXZ = Vector3(velocity.x, 0, velocity.z)
+	var velocity_xz = Vector3(velocity.x, 0, velocity.z)
 	var wallrunning = is_on_wall_only()
 	
 	if wallrunning:
+		var wall_normal = get_wall_normal()
+		var cross = wall_normal.cross(Vector3.UP).normalized()
+		var direction = 1 if cross.angle_to($Camera3D.get_global_transform().basis.z) > PI / 2 else -1
+		var wall_normal_xz = Vector3(wall_normal.x, 0, wall_normal.z).normalized()
 		
-		velocity.y -= gravity * delta * WALLRUN_EFFC
+		var move = Vector3(0, 0, input_dir.y).rotated(
+			Vector3.UP,
+			Vector3.LEFT.signed_angle_to(wall_normal_xz, Vector3.UP)
+		) * SLIDE_SPEED * direction
+		var target_velocity = Vector3.ZERO
+		if move: target_velocity = (move + velocity).limit_length(max(velocity.length(), SLIDE_SPEED))
+		
+		velocity_xz = velocity_xz.lerp(target_velocity, MOVE_DAMP)
+		velocity.x = velocity_xz.x
+		velocity.z = velocity_xz.z
+		
+		velocity.y -= gravity * delta * WALLFALL_SPEED
+		
+		if Input.is_action_just_pressed("game_jump"):
+			velocity += (wall_normal + Vector3.UP).normalized() * JUMP_VELOCITY
+		elif Input.is_action_just_pressed("game_left" if direction == 1 else "game_right"):
+			wallrunning = false
 	
-	else:
-		var move = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized().rotated(Vector3.UP, rotation.y) * WALK_SPEED
+	if not wallrunning:
+		var move = Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, rotation.y) * WALK_SPEED
 		var target_velocity = Vector3.ZERO
 		if move:
 			target_velocity = move
 		if not on_floor:
-			target_velocity = (target_velocity + velXZ).limit_length(max(velXZ.length(), WALK_SPEED))
+			target_velocity = (target_velocity + velocity_xz).limit_length(max(velocity_xz.length(), WALK_SPEED))
 		else:
 			can_dash=true
 
-		velXZ = velXZ.lerp(target_velocity, WALK_DAMP)
-		velocity.x = velXZ.x
-		velocity.z = velXZ.z
+		velocity_xz = velocity_xz.lerp(target_velocity, MOVE_DAMP)
+		velocity.x = velocity_xz.x
+		velocity.z = velocity_xz.z
 
 		if on_floor:
 			if Input.is_action_just_pressed("game_jump"):
@@ -57,12 +70,8 @@ func _physics_process(delta):
 	
 		# Dash
 	if can_dash and Input.is_action_just_pressed("game_dash"):
-		var camera = $Camera3D
-		var dir = Basis(Vector3(0,1,0), camera.rotation.y*2)*Vector3(0,0,1)
-		velocity.x = -dir.x 
-		velocity.y = -camera.basis.z.y 
-		velocity.z = -dir.z 
-		velocity = DASH_SPEED*velocity.normalized()
+		var dir = $Camera3D.get_global_transform().basis.z
+		velocity -= dir * DASH_SPEED
 		can_dash = false
 	
 	# Cap velocity
@@ -73,7 +82,6 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		var y_rotation = event.relative.x * MOUSE_SENS
 		rotation.y -= y_rotation
-		$Camera3D.rotation.y -= y_rotation
 		$Camera3D.rotation.x -= event.relative.y * MOUSE_SENS
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 

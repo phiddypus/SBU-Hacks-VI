@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca4e2ubr85d8e"]
+[gd_scene load_steps=12 format=3 uid="uid://dtqq2x8nujj4"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_j5tnk"]
 [ext_resource type="PackedScene" uid="uid://h0xdvrrfp3by" path="res://scenes/platform.tscn" id="2_5y8bj"]
 [ext_resource type="PackedScene" uid="uid://dlun07cx67ccr" path="res://scenes/player.tscn" id="2_tof3l"]
-[ext_resource type="PackedScene" uid="uid://dlhysyqmfbnkx" path="res://scenes/wall.tscn" id="3_hqsbb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w7fsr"]
 height = 1.0
@@ -11,20 +10,36 @@ height = 1.0
 [sub_resource type="CylinderMesh" id="CylinderMesh_op4ry"]
 height = 1.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_esy4y"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0owse"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ll3so"]
+size = Vector3(5, 0.5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h8vfq"]
+size = Vector3(5, 0.5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8xveu"]
+size = Vector3(5, 0.5, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2qpgq"]
+size = Vector3(5, 0.5, 10)
+
 [node name="Level" type="Node3D"]
 script = ExtResource("1_j5tnk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 0)
+transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, 0, 5, 0)
+sky_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_tof3l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="Wall" parent="." instance=ExtResource("3_hqsbb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.5, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 20)
 
 [node name="End" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.98513, 21.1715, 13.4686)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="End"]
@@ -33,10 +48,75 @@ shape = SubResource("CylinderShape3D_w7fsr")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="End"]
 mesh = SubResource("CylinderMesh_op4ry")
 
+[node name="Ground" parent="." instance=ExtResource("2_5y8bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" parent="Ground" index="0"]
+shape = SubResource("BoxShape3D_esy4y")
+
+[node name="MeshInstance3D" parent="Ground" index="1"]
+mesh = SubResource("BoxMesh_0owse")
+
 [node name="Platform" parent="." instance=ExtResource("2_5y8bj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.082, 0.8, 20.283)
+
+[node name="CollisionShape3D" parent="Platform" index="0"]
+shape = SubResource("BoxShape3D_ll3so")
+
+[node name="MeshInstance3D" parent="Platform" index="1"]
+mesh = SubResource("BoxMesh_h8vfq")
+
+[node name="Platform2" parent="." instance=ExtResource("2_5y8bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.128, 1.6, 20.283)
+
+[node name="CollisionShape3D" parent="Platform2" index="0"]
+shape = SubResource("BoxShape3D_ll3so")
+
+[node name="MeshInstance3D" parent="Platform2" index="1"]
+mesh = SubResource("BoxMesh_h8vfq")
+
+[node name="Platform3" parent="." instance=ExtResource("2_5y8bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59484, 2.4, 20.283)
+
+[node name="CollisionShape3D" parent="Platform3" index="0"]
+shape = SubResource("BoxShape3D_ll3so")
+
+[node name="MeshInstance3D" parent="Platform3" index="1"]
+mesh = SubResource("BoxMesh_h8vfq")
+
+[node name="Platform4" parent="." instance=ExtResource("2_5y8bj")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.878352, 3.85024, 16.6471)
+
+[node name="CollisionShape3D" parent="Platform4" index="0"]
+shape = SubResource("BoxShape3D_8xveu")
+
+[node name="MeshInstance3D" parent="Platform4" index="1"]
+mesh = SubResource("BoxMesh_2qpgq")
+
+[node name="Platform5" parent="." instance=ExtResource("2_5y8bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.595, 4, 14.051)
+
+[node name="CollisionShape3D" parent="Platform5" index="0"]
+shape = SubResource("BoxShape3D_ll3so")
+
+[node name="MeshInstance3D" parent="Platform5" index="1"]
+mesh = SubResource("BoxMesh_h8vfq")
+
+[node name="Platform6" parent="." instance=ExtResource("2_5y8bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.29664, 20.5503, 14.051)
+
+[node name="CollisionShape3D" parent="Platform6" index="0"]
+shape = SubResource("BoxShape3D_ll3so")
+
+[node name="MeshInstance3D" parent="Platform6" index="1"]
+mesh = SubResource("BoxMesh_h8vfq")
 
 [connection signal="body_entered" from="End" to="." method="_on_end_body_entered"]
 
-[editable path="Wall"]
+[editable path="Ground"]
 [editable path="Platform"]
+[editable path="Platform2"]
+[editable path="Platform3"]
+[editable path="Platform4"]
+[editable path="Platform5"]
+[editable path="Platform6"]
