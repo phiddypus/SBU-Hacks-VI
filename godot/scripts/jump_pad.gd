@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var jump_pad_strength = 10
+@export var jump_pad_strength = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

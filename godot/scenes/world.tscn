@@ -24,12 +24,12 @@ size = Vector3(1, 0.5, 1)
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8ucbe"]
 panorama = ExtResource("5_o5gys")
 
-[sub_resource type="Sky" id="Sky_8hehq"]
+[sub_resource type="Sky" id="Sky_6dh5u"]
 sky_material = SubResource("PanoramaSkyMaterial_8ucbe")
 
 [sub_resource type="Environment" id="Environment_q7nyj"]
 background_mode = 2
-sky = SubResource("Sky_8hehq")
+sky = SubResource("Sky_6dh5u")
 
 [node name="world" type="Node3D"]
 

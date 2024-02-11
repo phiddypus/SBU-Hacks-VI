@@ -5,7 +5,7 @@ const DASH_SPEED = WALK_SPEED ** 2
 const SLIDE_SPEED = 4.0
 const SLIDE_VERT_DIFF = 0.1
 const MOVE_DAMP = 0.25
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 8
 const WALLFALL_SPEED = 0.2 # how slow you fall when on a wall
 const MOUSE_SENS = 0.003
 
@@ -44,6 +44,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta * WALLFALL_SPEED
 		
 		if Input.is_action_just_pressed("game_jump"):
+			if velocity.y < 0: velocity.y = 0
 			velocity += (wall_normal + Vector3.UP).normalized() * JUMP_VELOCITY
 		elif Input.is_action_just_pressed("game_left" if direction == 1 else "game_right"):
 			wallrunning = false

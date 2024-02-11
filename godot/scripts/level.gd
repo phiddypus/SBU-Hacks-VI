@@ -12,6 +12,7 @@ var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	startPos = $Player.position
 	endPos = $End.position
 	completion = cplt_statuses.NOT_STARTED
 	completion = cplt_statuses.IN_PROGRESS
@@ -24,4 +25,10 @@ func _process(delta):
 func _on_end_body_entered(body):
 	if body is CharacterBody3D:
 		completion = cplt_statuses.FINISHED
-		print("Your time: " + time)
+		print("Your time: " + str(time))
+
+func _input(event):
+	if event.is_action("game_reset"):
+		time = 0
+		$Player.position = startPos
+		$Player.velocity = Vector3.ZERO
