@@ -58,9 +58,7 @@ func _physics_process(delta):
 		# Dash
 	if can_dash and Input.is_action_just_pressed("game_dash"):
 		var camera = $Camera3D
-		#var camera_dir = $Camera3D.basis.z
-		var dir = Basis(Vector3(1,0,0),camera.rotation.x*2)*Basis(Vector3(0,1,0), camera.rotation.y*2)*Vector3(0,0,1)
-		#print(camera.basis.z.y)
+		var dir = Basis(Vector3(0,1,0), camera.rotation.y*2)*Vector3(0,0,1)
 		velocity.x = -dir.x 
 		velocity.y = -camera.basis.z.y 
 		velocity.z = -dir.z 

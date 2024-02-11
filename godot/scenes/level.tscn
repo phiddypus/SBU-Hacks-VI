@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtqq2x8nujj4"]
+[gd_scene load_steps=7 format=3 uid="uid://ca4e2ubr85d8e"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_j5tnk"]
 [ext_resource type="PackedScene" uid="uid://h0xdvrrfp3by" path="res://scenes/platform.tscn" id="2_5y8bj"]
 [ext_resource type="PackedScene" uid="uid://dlun07cx67ccr" path="res://scenes/player.tscn" id="2_tof3l"]
-[ext_resource type="PackedScene" uid="uid://bknfmrp2r1i5k" path="res://scenes/wall.tscn" id="3_hqsbb"]
+[ext_resource type="PackedScene" uid="uid://dlhysyqmfbnkx" path="res://scenes/wall.tscn" id="3_hqsbb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w7fsr"]
 height = 1.0
