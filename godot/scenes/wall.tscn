@@ -1,8 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bknfmrp2r1i5k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_egnx3"]
+size = Vector3(0.5, 5, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_jvy6g"]
+size = Vector3(0.5, 5, 5)
 
 [node name="Wall" type="StaticBody3D"]
 collision_layer = 2

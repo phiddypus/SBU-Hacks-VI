@@ -20,4 +20,4 @@ func _process(delta):
 func _on_end_body_entered(body):
 	if body is CharacterBody3D:
 		stopped = true
-		print(time)
+		#print(time)
