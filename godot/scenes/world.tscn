@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgpdkyf3max8v"]
+[gd_scene load_steps=14 format=3 uid="uid://bgpdkyf3max8v"]
 
 [ext_resource type="Texture2D" uid="uid://baoy87b10m0si" path="res://textures/woodtext.png" id="1_5sgq1"]
 [ext_resource type="PackedScene" uid="uid://dlun07cx67ccr" path="res://scenes/player.tscn" id="2_bx8pb"]
 [ext_resource type="PackedScene" path="res://scenes/jump_pad.tscn" id="3_2fjsn"]
 [ext_resource type="PackedScene" uid="uid://bvip7vcq1rgl0" path="res://scenes/moving_platform.tscn" id="3_n8b2x"]
+[ext_resource type="Texture2D" uid="uid://dyxeki6ux837s" path="res://textures/pano.png" id="5_o5gys"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vv6oa"]
 size = Vector3(10, 1, 10)
@@ -19,6 +20,16 @@ size = Vector3(1, 0.5, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qu3e0"]
 size = Vector3(1, 0.5, 1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8ucbe"]
+panorama = ExtResource("5_o5gys")
+
+[sub_resource type="Sky" id="Sky_8hehq"]
+sky_material = SubResource("PanoramaSkyMaterial_8ucbe")
+
+[sub_resource type="Environment" id="Environment_q7nyj"]
+background_mode = 2
+sky = SubResource("Sky_8hehq")
 
 [node name="world" type="Node3D"]
 
@@ -69,6 +80,9 @@ shape = SubResource("BoxShape3D_howin")
 [node name="MeshInstance3D" parent="Moving Platform3" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.922, 0, 0, 0)
 mesh = SubResource("BoxMesh_qu3e0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q7nyj")
 
 [editable path="Moving Platform2"]
 [editable path="Moving Platform3"]

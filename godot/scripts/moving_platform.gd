@@ -9,6 +9,7 @@ var direction = Vector3(0,0,0)
 var time = 0
 func _ready():        
 	time = 0;
+	initialPosition = position
 	direction = finalPosition - initialPosition
 
 

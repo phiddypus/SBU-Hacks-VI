@@ -19,7 +19,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96783, 0)
 [node name="Moving Platform" type="AnimatableBody3D" parent="."]
 collision_layer = 2
 script = ExtResource("2_cpqhh")
-initialPosition = Vector3(0, 0, 0)
 finalPosition = Vector3(15, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Moving Platform"]
